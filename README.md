@@ -64,5 +64,26 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-HundredX is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/hundredx_stock/
+HundredX is a Dallas/Addison, Texas data and insights company (founded 2012) that measures customer
+experience at scale and links it to future business performance. It collects double-blind, ethically
+sourced consumer feedback through its HundredX Causes programs — funding nonprofits for every
+qualifying response — and licenses the resulting corpus and its GO Score (Growth Outlook) to
+enterprises, institutional investors and AI platforms.
+
+**HundredX operates no public developer program.** There is no API documentation, OpenAPI
+description, SDK, pricing page or self-serve signup. What this profile records is what HundredX
+actually serves on the public internet, probed on 2026-08-22:
+
+- `hundredx.com` and `api.hundredxinc.com` each serve an RFC 9116 `security.txt`.
+- `login.hundredxinc.com` (Auth0 custom domain) serves a full OIDC discovery document for the
+  customer portal at `portal.hundredx.com`.
+- Two OAuth 2.1 MCP servers — `hx-bigquery-mcp.hundredx.com` and `jupyter-mcp.hundredx.com` —
+  publish RFC 9728 / RFC 8414 metadata. These are HundredX's own internal analyst tooling over its
+  BigQuery warehouse and notebooks, not a customer-facing agent product.
+- Every `hundredx.com` HTML page returns HTTP 403 to non-browser clients behind a Cloudflare
+  managed challenge.
+
+Links:
+- https://hundredx.com/
+- https://help.hundredx.com/
+- Secondary-market listing (a venue page, not a HundredX property): https://forgeglobal.com/hundredx_stock/

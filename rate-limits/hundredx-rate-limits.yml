@@ -1,0 +1,27 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Response headers observed on anonymous requests to every HundredX-controlled host
+  (hundredx.com, api.hundredxinc.com, feedbackhistory.api.hundredxinc.com,
+  hx-bigquery-mcp.hundredx.com, jupyter-mcp.hundredx.com, help.hundredx.com), 2026-08-22.
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  HundredX documents no rate limits, and none were observable at runtime. No RateLimit-*,
+  X-RateLimit-*, or Retry-After header appeared on any anonymous response from any host. The
+  only throttling in evidence is edge policy, not an API limit: hundredx.com sits behind a
+  Cloudflare managed challenge that returns 403 to non-browser clients, and cube-mcp /
+  hx-internal-portal / menu-agent sit behind Cloudflare Access. An honest zero — there is no
+  public API surface with a published quota to record.
+evidence:
+  - url: https://hx-bigquery-mcp.hundredx.com/
+    status: 200
+    note: 200 JSON banner, no rate-limit headers.
+  - url: https://feedbackhistory.api.hundredxinc.com/
+    status: 404
+    note: HAL error envelope, no rate-limit headers.
+  - url: https://hundredx.com/
+    status: 403
+    note: Cloudflare managed challenge (cf-mitigated. challenge), not a rate-limit response.

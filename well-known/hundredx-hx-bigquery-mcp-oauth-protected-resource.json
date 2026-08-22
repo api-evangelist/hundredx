@@ -1,0 +1,1 @@
+{"resource":"https://hx-bigquery-mcp.hundredx.com","authorization_servers":["https://hx-bigquery-mcp.hundredx.com"],"scopes_supported":["openid","email","profile","bigquery.readonly","cloud-platform.read-only"],"bearer_methods_supported":["header"]}

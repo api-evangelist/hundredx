@@ -1,0 +1,4 @@
+Canonical: https://hundredxinc.com/.well-known/security.txt
+Contact: mailto:security@hundredx.com
+Expires: 2027-06-20T00:00:00Z
+Preferred-Languages: en

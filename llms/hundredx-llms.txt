@@ -1,0 +1,75 @@
+# HundredX
+
+> HundredX is a Dallas/Addison, Texas data and insights company (founded 2012) that measures
+> customer experience at scale and links it to future business performance. It licenses the
+> resulting first-party consumer-feedback corpus and its GO Score (Growth Outlook) to
+> enterprises, institutional investors and AI platforms. HundredX operates NO public developer
+> program: there is no API documentation, no OpenAPI description, no SDK, no pricing page and
+> no self-serve signup.
+
+<!--
+generated: 2026-08-22
+method: generated
+source: apis.yml + artifacts in this repository (HundredX publishes no llms.txt of its own;
+        /llms.txt returns 403 on hundredx.com and 404 on every other HundredX host)
+-->
+
+## What HundredX sells
+
+- Double-blind, ethically sourced consumer feedback collected through HundredX Causes programs,
+  which fund nonprofits for every qualifying response.
+- Coverage described by the company as 80+ industries and roughly two-thirds of the US economy.
+- The HundredX GO Score (Growth Outlook), positioned as a 6-12 month leading indicator of
+  revenue growth and market performance.
+- Delivery is sales-led: a customer portal, negotiated data feeds, and partner alliances
+  (Deloitte, Goldman Sachs). Not an API product.
+
+## Public surfaces
+
+- [Website](https://hundredx.com/): marketing site. Sits behind a Cloudflare managed challenge;
+  returns HTTP 403 to non-browser clients.
+- [About](https://hundredx.com/aboutus)
+- [Help Center](https://help.hundredx.com/): Freshdesk portal, HTTP 200, but client-side
+  rendered — no article content in the HTML.
+- [Customer portal](https://portal.hundredx.com/): redirects to an Auth0 login at
+  login.hundredxinc.com. Login only, no signup.
+- [Terms of Use](https://hundredx.com/terms-of-use)
+- [Privacy Policy](https://hundredx.com/privacy)
+- [News and Insights](https://hundredx.com/news-and-insights)
+
+## Machine-readable documents HundredX actually serves
+
+- `https://hundredx.com/.well-known/security.txt` — RFC 9116, Contact chris.cowan@hundredx.com,
+  Expires 2027-06-20.
+- `https://api.hundredxinc.com/.well-known/security.txt` — a second RFC 9116 document for the
+  hundredxinc.com apex, Contact security@hundredx.com.
+- `https://login.hundredxinc.com/.well-known/openid-configuration` — OIDC discovery for the
+  Auth0 custom-domain tenant fronting the customer portal.
+- `https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-protected-resource` and
+  `/.well-known/oauth-authorization-server` — RFC 9728 / RFC 8414 metadata for an MCP server.
+- `https://jupyter-mcp.hundredx.com/.well-known/oauth-protected-resource` and
+  `/.well-known/oauth-authorization-server` — same, for a second MCP server.
+
+## MCP
+
+HundredX runs two publicly reachable MCP servers, "HX BigQuery MCP Server" 2.0.0 and
+"Jupyter MCP Server" 2.0.0, both OAuth 2.1 with Google-federated identity. THEY ARE INTERNAL
+ANALYST TOOLING over HundredX's own warehouse and notebooks (scopes bigquery.readonly,
+cloud-platform), not a customer-facing agent product, and HundredX publishes no documentation
+for them. An anonymous `tools/list` returns 401 invalid_token, so no tool schemas are known.
+
+## What does NOT exist
+
+- No OpenAPI, Swagger, AsyncAPI, GraphQL, gRPC/Protobuf or WSDL contract on any HundredX host.
+- No developer portal, API reference, quickstart, changelog or Postman collection.
+- No first-party SDK on npm, PyPI, Maven Central, NuGet, RubyGems, crates.io or pkg.go.dev.
+- No public GitHub organization (github.com/Hundredxinc exists but has zero public repositories;
+  github.com/hundrEDX is an unrelated OpenEdX project).
+- No A2A agent card on any host.
+- No published plans, prices, quotas or rate limits.
+- No working status page (status.hundredx.com returns HTTP 525).
+
+## Contact
+
+- Security: security@hundredx.com (per the hundredxinc.com security.txt)
+- Support: https://help.hundredx.com/

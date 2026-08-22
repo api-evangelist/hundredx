@@ -1,0 +1,1 @@
+{"resource":"https://jupyter-mcp.hundredx.com","authorization_servers":["https://jupyter-mcp.hundredx.com"],"scopes_supported":["openid","email","profile","cloud-platform"],"bearer_methods_supported":["header"]}

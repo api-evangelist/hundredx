@@ -1,0 +1,171 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Anonymous HTTP probes of every HundredX-controlled host discovered via DNS and
+  certificate transparency (api.certspotter.com) on 2026-08-22.
+note: >-
+  HundredX runs two apex domains: hundredx.com (marketing, help center, internal
+  agent/MCP tooling) and hundredxinc.com (application and API tier, including the
+  Auth0 custom-domain tenant login.hundredxinc.com). Both are HundredX, Inc. — the
+  security.txt served on hundredx.com and on the hundredxinc.com API hosts point at
+  the same security contact domain (@hundredx.com), which is how the two apexes were
+  tied together. Every 403 below is a Cloudflare managed challenge (cf-mitigated:
+  challenge), NOT a missing document: robots.txt and /.well-known/security.txt are
+  served from the same origin and answer 200.
+hosts:
+  - host: hundredx.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-security.txt
+        note: RFC 9116 document with Canonical, Contact, Expires (2027-06-20) and Preferred-Languages.
+      - path: /.well-known/openid-configuration
+        status: 403
+        file: null
+        note: Cloudflare managed challenge, not a served document.
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        file: null
+      - path: /.well-known/api-catalog
+        status: 403
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 403
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 403
+        file: null
+      - path: /.well-known/agent.json
+        status: 403
+        file: null
+      - path: /llms.txt
+        status: 403
+        file: null
+  - host: login.hundredxinc.com
+    note: >-
+      Auth0 custom-domain tenant (CNAME hundredxinc-cd-qqj4jm3or9ramo81.edge.tenants.auth0.com)
+      fronting the HundredX customer portal at portal.hundredx.com.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: well-known/hundredx-login-openid-configuration.json
+        note: Full OIDC discovery document; issuer https://login.hundredxinc.com/.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: well-known/hundredx-login-openid-configuration.json
+        note: Auth0 serves the identical document at both paths (RFC 8414 alias).
+      - path: /.well-known/jwks.json
+        status: 200
+        file: well-known/hundredx-login-jwks.json
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: hx-bigquery-mcp.hundredx.com
+    note: HundredX-operated MCP server ("HX BigQuery MCP Server" 2.0.0), OAuth 2.1 gated.
+    documents:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        file: well-known/hundredx-hx-bigquery-mcp-oauth-protected-resource.json
+        note: RFC 9728 protected-resource metadata.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: well-known/hundredx-hx-bigquery-mcp-oauth-authorization-server.json
+        note: RFC 8414 authorization-server metadata, incl. RFC 7591 registration_endpoint and PKCE S256.
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-security.txt
+        note: Same document as the hundredx.com apex (served edge-wide).
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /openapi.json
+        status: 404
+        file: null
+  - host: jupyter-mcp.hundredx.com
+    note: HundredX-operated MCP server ("Jupyter MCP Server" 2.0.0), OAuth 2.1 gated.
+    documents:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        file: well-known/hundredx-jupyter-mcp-oauth-protected-resource.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: well-known/hundredx-jupyter-mcp-oauth-authorization-server.json
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-security.txt
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: api.hundredxinc.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-hundredxinc-security.txt
+        note: Distinct from the hundredx.com document — Contact mailto:security@hundredx.com, Canonical https://hundredxinc.com/.well-known/security.txt.
+      - path: /openapi.json
+        status: 404
+        file: null
+      - path: /v3/api-docs
+        status: 404
+        file: null
+  - host: feedbackhistory.api.hundredxinc.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-hundredxinc-security.txt
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /v3/api-docs
+        status: 404
+        file: null
+      - path: /openapi.json
+        status: 404
+        file: null
+      - path: /profile
+        status: 404
+        file: null
+        note: Spring HATEOAS/HAL error envelope returned for every path — the API is present but every route is gated or unmapped anonymously.
+  - host: help.hundredx.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-security.txt
+      - path: /llms.txt
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: menu-agent.hundredx.com
+    note: >-
+      REJECTED AS EVIDENCE. Cloudflare Access sits in front of this host and answers
+      200 text/html ("Sign in - Cloudflare Access") for EVERY /.well-known/* path,
+      including agent-card.json, agent.json, api-catalog and ai-plugin.json. None of
+      these is a document; the 200s are an SPA catch-all and are recorded here so a
+      later run does not mistake them for hits.
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        note: HTML sign-in shell, not an AgentCard. Not a hit.
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        note: HTML sign-in shell. Not a hit.
+      - path: /.well-known/security.txt
+        status: 200
+        file: well-known/hundredx-security.txt
+        note: Genuine text/plain RFC 9116 document (the only real one on this host).

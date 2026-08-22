@@ -1,0 +1,76 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  https://login.hundredxinc.com/.well-known/openid-configuration,
+  https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-authorization-server,
+  https://jupyter-mcp.hundredx.com/.well-known/oauth-authorization-server — all fetched
+  anonymously on 2026-08-22.
+note: >-
+  Derived from live discovery documents, not from an OpenAPI — HundredX publishes no
+  machine-readable API contract. Every scheme below is the auth in front of a HundredX
+  surface, not a documented developer-facing scheme; HundredX has no public developer
+  program and issues no self-serve credentials.
+schemes:
+  - id: hundredx-portal-oidc
+    surface: https://portal.hundredx.com/ (HundredX customer insights portal)
+    type: openIdConnect
+    openIdConnectUrl: https://login.hundredxinc.com/.well-known/openid-configuration
+    issuer: https://login.hundredxinc.com/
+    provider: Auth0 (custom domain on hundredxinc.com)
+    endpoints:
+      authorization: https://login.hundredxinc.com/authorize
+      token: https://login.hundredxinc.com/oauth/token
+      userinfo: https://login.hundredxinc.com/userinfo
+      jwks: https://login.hundredxinc.com/.well-known/jwks.json
+      revocation: https://login.hundredxinc.com/oauth/revoke
+      device_authorization: https://login.hundredxinc.com/oauth/device/code
+      registration: https://login.hundredxinc.com/oidc/register
+      backchannel_authentication: https://login.hundredxinc.com/bc-authorize
+    grant_types:
+      - authorization_code
+      - client_credentials
+      - refresh_token
+      - implicit
+      - password
+      - urn:ietf:params:oauth:grant-type:device_code
+      - urn:ietf:params:oauth:grant-type:token-exchange
+      - urn:ietf:params:oauth:grant-type:jwt-bearer
+    pkce: [S256, plain]
+    token_endpoint_auth_methods: [client_secret_basic, client_secret_post, private_key_jwt, none]
+    id_token_signing_algs: [RS256, PS256, HS256]
+    dpop_signing_algs: [ES256]
+    mfa: true
+    mfa_note: mfa_challenge_endpoint present (https://login.hundredxinc.com/mfa/challenge).
+    onboarding: invite-only
+    onboarding_note: >-
+      The portal is a customer login, not a signup. Fetching https://portal.hundredx.com/
+      anonymously redirects to https://login.hundredxinc.com/u/login and returns HTTP 400
+      without client parameters.
+  - id: hundredx-mcp-oauth21
+    surface: https://hx-bigquery-mcp.hundredx.com/mcp and https://jupyter-mcp.hundredx.com/mcp
+    type: oauth2
+    profile: OAuth 2.1 (MCP authorization), Google-federated identity
+    bearer_methods: [header]
+    protected_resource_metadata:
+      - https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-protected-resource
+      - https://jupyter-mcp.hundredx.com/.well-known/oauth-protected-resource
+    authorization_server_metadata:
+      - https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-authorization-server
+      - https://jupyter-mcp.hundredx.com/.well-known/oauth-authorization-server
+    grant_types: [authorization_code, refresh_token]
+    response_types: [code]
+    pkce: [S256, plain]
+    dynamic_client_registration: true
+    token_endpoint_auth_methods: [client_secret_basic, client_secret_post, none]
+    unauthenticated_response:
+      status: 401
+      body: '{"error":"invalid_token","error_description":"Missing or invalid access token"}'
+  - id: hundredx-feedbackhistory-api
+    surface: https://feedbackhistory.api.hundredxinc.com
+    type: unknown
+    note: >-
+      A live HAL/Spring HATEOAS API host. Every anonymous request — including /, /v1, /api,
+      /feedback and /profile — returns the same 404 HAL envelope, so no challenge, scheme or
+      realm is exposed. Recorded as unknown rather than guessed.
+api_keys: none_published
+api_keys_note: HundredX publishes no API key issuance, key prefix, or credential documentation.

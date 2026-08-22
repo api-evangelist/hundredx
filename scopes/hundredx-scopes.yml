@@ -1,0 +1,50 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  https://login.hundredxinc.com/.well-known/openid-configuration,
+  https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-protected-resource,
+  https://jupyter-mcp.hundredx.com/.well-known/oauth-protected-resource (fetched 2026-08-22).
+docs: null
+docs_note: >-
+  HundredX publishes no scopes/permissions reference page. Every scope below was read from a
+  live discovery document, and descriptions are the standard meaning of the registered scope —
+  no HundredX-specific description exists to quote.
+surfaces:
+  - id: hundredx-portal-oidc
+    issuer: https://login.hundredxinc.com/
+    scopes:
+      - name: openid
+        description: OIDC — request an ID token.
+      - name: profile
+        description: OIDC — basic profile claims.
+      - name: offline_access
+        description: OIDC — issue a refresh token.
+      - name: name
+      - name: given_name
+      - name: family_name
+      - name: nickname
+      - name: email
+      - name: email_verified
+      - name: picture
+      - name: created_at
+      - name: identities
+      - name: phone
+      - name: address
+  - id: hx-bigquery-mcp
+    issuer: https://hx-bigquery-mcp.hundredx.com
+    scopes:
+      - name: openid
+      - name: email
+      - name: profile
+      - name: bigquery.readonly
+        description: Google Cloud BigQuery read-only — the MCP server reads HundredX's warehouse on the caller's behalf.
+      - name: cloud-platform.read-only
+        description: Google Cloud read-only platform access.
+  - id: jupyter-mcp
+    issuer: https://jupyter-mcp.hundredx.com
+    scopes:
+      - name: openid
+      - name: email
+      - name: profile
+      - name: cloud-platform
+        description: Google Cloud platform access (read/write) for notebook execution.

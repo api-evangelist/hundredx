@@ -1,0 +1,86 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  https://hx-bigquery-mcp.hundredx.com/ and https://jupyter-mcp.hundredx.com/ (HTTP 200
+  service banners), their RFC 9728 / RFC 8414 discovery documents, and anonymous
+  JSON-RPC POSTs to /mcp on 2026-08-22.
+name: HundredX MCP Servers
+status: published
+deployment:
+  mode: remote
+  endpoint: https://hx-bigquery-mcp.hundredx.com/mcp
+  install: null
+  package: null
+  auth: oauth
+  verified: probed
+audience: internal
+audience_note: >-
+  IMPORTANT — these are HundredX's own INTERNAL analyst tooling, not a customer-facing
+  agent product. The hostnames (BigQuery, Jupyter, strategy-team, dag-ops) and the
+  Google-federated OAuth scopes (bigquery.readonly, cloud-platform) describe employee
+  access to HundredX's warehouse and notebooks. They are publicly reachable and they
+  publish standards-compliant discovery metadata, which is why they are recorded here,
+  but HundredX publishes no developer documentation for them and no public MCP product.
+  Do not read this artifact as "HundredX ships an MCP server customers can call."
+servers:
+  - name: HX BigQuery MCP Server
+    version: '2.0.0'
+    host: hx-bigquery-mcp.hundredx.com
+    endpoint: https://hx-bigquery-mcp.hundredx.com/mcp
+    transport: streamable-http
+    status_endpoint: https://hx-bigquery-mcp.hundredx.com/
+    status_banner: '{"status":"ok","name":"HX BigQuery MCP Server","version":"2.0.0","auth":"oauth2.1 (Google)"}'
+    auth:
+      type: oauth2.1
+      identity_provider: Google
+      protected_resource_metadata: https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-protected-resource
+      authorization_server_metadata: https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-authorization-server
+      dynamic_client_registration: https://hx-bigquery-mcp.hundredx.com/register
+      pkce: [S256, plain]
+      scopes: [openid, email, profile, bigquery.readonly, cloud-platform.read-only]
+    tools_list:
+      attempted: true
+      http_status: 401
+      body: '{"error":"invalid_token","error_description":"Missing or invalid access token"}'
+      note: >-
+        Live tool schemas require an authenticated introspection. No tool list is recorded
+        because none could be read without credentials, and none may be invented.
+    tools: []
+  - name: Jupyter MCP Server
+    version: '2.0.0'
+    host: jupyter-mcp.hundredx.com
+    endpoint: https://jupyter-mcp.hundredx.com/mcp
+    transport: streamable-http
+    status_endpoint: https://jupyter-mcp.hundredx.com/
+    status_banner: '{"status":"ok","name":"Jupyter MCP Server","version":"2.0.0","auth":"oauth2.1 (Google)"}'
+    auth:
+      type: oauth2.1
+      identity_provider: Google
+      protected_resource_metadata: https://jupyter-mcp.hundredx.com/.well-known/oauth-protected-resource
+      authorization_server_metadata: https://jupyter-mcp.hundredx.com/.well-known/oauth-authorization-server
+      dynamic_client_registration: https://jupyter-mcp.hundredx.com/register
+      pkce: [S256, plain]
+      scopes: [openid, email, profile, cloud-platform]
+    tools_list:
+      attempted: true
+      http_status: 401
+      body: '{"error":"invalid_token","error_description":"Missing or invalid access token"}'
+    tools: []
+observed_but_not_reachable:
+  - host: cube-mcp.hundredx.com
+    status: 403
+    note: Cloudflare Access sign-in wall; no anonymous discovery metadata.
+  - host: mcp-strategy-team.hundredx.com
+    status: 403
+    note: Cloudflare error 1014 (CNAME cross-user banned) — configured but not serving.
+  - host: hundredx-knowledge-mcp.hundredx.com
+    status: NXDOMAIN
+    note: Present in certificate transparency, no current DNS record.
+  - host: cube-proxy.hundredx.com
+    status: 200
+    note: '{"status":"ok","service":"cube-proxy"} at root; /mcp returns 404 — a Cube.js proxy, not an MCP endpoint.'
+tool_crosswalk: null
+tool_crosswalk_reason: >-
+  No ToolCrosswalk is emitted. A crosswalk binds MCP tools to backing OpenAPI operationIds,
+  and HundredX publishes neither an OpenAPI nor a GraphQL surface, and the live MCP tool
+  lists are OAuth-gated. There is nothing on either side of the mapping to bind.

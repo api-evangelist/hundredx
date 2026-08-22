@@ -1,0 +1,113 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Live discovery documents on HundredX-controlled hosts, fetched anonymously 2026-08-22.
+  Every `conforms: true` below points at a document this pipeline read; nothing is asserted
+  from a marketing claim.
+standards:
+  - id: rfc9116
+    name: security.txt
+    conforms: true
+    evidence: >-
+      https://hundredx.com/.well-known/security.txt returns 200 text/plain with Canonical,
+      Contact (mailto:chris.cowan@hundredx.com), Expires (2027-06-20T12:00:00Z) and
+      Preferred-Languages. A second, distinct document at
+      https://api.hundredxinc.com/.well-known/security.txt carries Contact
+      mailto:security@hundredx.com and Canonical https://hundredxinc.com/.well-known/security.txt.
+    deviations:
+      - No Policy field.
+      - No Encryption field.
+      - No Acknowledgments or Hiring field.
+  - id: oidc
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: >-
+      https://login.hundredxinc.com/.well-known/openid-configuration returns 200 application/json
+      with issuer, authorization_endpoint, token_endpoint, userinfo_endpoint, jwks_uri and
+      claims_supported. Auth0 custom-domain tenant operated on HundredX's own hundredxinc.com.
+  - id: oauth2
+    name: OAuth 2.0 / 2.1
+    conforms: true
+    evidence: >-
+      Three independent authorization servers publish RFC 8414 metadata:
+      login.hundredxinc.com (portal) and hx-bigquery-mcp / jupyter-mcp (MCP). All advertise
+      authorization_code + refresh_token and PKCE.
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: true
+    evidence: >-
+      https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-authorization-server and
+      https://jupyter-mcp.hundredx.com/.well-known/oauth-authorization-server both return 200
+      application/json with issuer, authorization_endpoint, token_endpoint, registration_endpoint,
+      revocation_endpoint, scopes_supported and code_challenge_methods_supported.
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata
+    conforms: true
+    evidence: >-
+      https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-protected-resource returns
+      {"resource":..., "authorization_servers":[...], "scopes_supported":[...],
+      "bearer_methods_supported":["header"]}. Same shape on jupyter-mcp.hundredx.com.
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration
+    conforms: true
+    evidence: >-
+      registration_endpoint published by both MCP authorization servers
+      (https://hx-bigquery-mcp.hundredx.com/register) and by the Auth0 tenant
+      (https://login.hundredxinc.com/oidc/register).
+  - id: rfc7636
+    name: PKCE
+    conforms: true
+    evidence: code_challenge_methods_supported ["S256","plain"] on all three authorization servers.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: partial
+    evidence: >-
+      Two servers self-identify as MCP ("HX BigQuery MCP Server" 2.0.0, "Jupyter MCP Server" 2.0.0)
+      and implement the MCP authorization profile (RFC 9728 + RFC 8414 + PKCE + DCR). A JSON-RPC
+      tools/list POST to /mcp returns 401 invalid_token, so protocol conformance beyond the
+      authorization layer could not be verified anonymously.
+  - id: hal
+    name: HAL / Spring HATEOAS hypermedia
+    conforms: true
+    evidence: >-
+      https://feedbackhistory.api.hundredxinc.com returns a HAL envelope on every path —
+      {"message":...,"logref":null,"path":null,"_embedded":{},"_links":{"self":{"href":...,
+      "templated":false,"profile":null,"deprecation":null,"title":null,"hreflang":null,
+      "type":null,"name":null}}} — the Spring HATEOAS Link representation including the
+      Deprecation and Profile link attributes.
+  - id: rfc9457
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      No application/problem+json observed. feedbackhistory.api.hundredxinc.com returns
+      application/json HAL errors; the MCP servers return the OAuth 2.0 error object
+      {"error":"invalid_token","error_description":...} per RFC 6750.
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: >-
+      /openapi.json, /openapi.yaml, /swagger.json, /v2/api-docs, /v3/api-docs, /api-docs,
+      /swagger-ui.html and /docs all miss on hundredx.com (403 challenge),
+      api.hundredxinc.com (404) and feedbackhistory.api.hundredxinc.com (404 HAL).
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: No event, streaming or webhook surface published; /asyncapi.yaml not served on any host.
+  - id: idempotency
+    name: Idempotency keys
+    conforms: false
+    evidence: No documented idempotency header. No public write surface exists to apply one to.
+  - id: pagination
+    name: Documented pagination
+    conforms: false
+    evidence: No public API reference documents pagination.
+domain_standards:
+  checked: true
+  found: []
+  note: >-
+    REWARD-ONLY CHECK, HONESTLY EMPTY. HundredX's market is consumer-experience /
+    market-research data. The candidate domain standards for that market — the Insights
+    Association / ESOMAR data-quality schemas, and generic survey-data interchange (Triple-S,
+    Qualtrics QSF) — appear nowhere in any HundredX-served document, and there is no
+    contract to inspect for a URN, $metadata surface or message type. No conformance is
+    asserted, and none is invented to fill the slot.

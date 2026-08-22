@@ -1,23 +1,124 @@
 aid: hundredx
 name: HundredX
-description: 'HundredX is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  HundredX is a Dallas/Addison, Texas data and insights company founded in 2012 that measures
+  customer experience at scale and links it to future business performance. Its "data for good"
+  model collects double-blind, ethically sourced feedback through HundredX Causes programs —
+  contributing funding to nonprofits for every qualifying response — and has accumulated tens of
+  millions of pieces of first-party consumer feedback across 80+ industries covering roughly
+  two-thirds of the US economy. The company packages that corpus as the HundredX GO Score
+  (Growth Outlook), a leading indicator of revenue growth and market performance 6-12 months
+  ahead, and licenses it to enterprises, institutional investors and AI platforms through a
+  sales-led motion and partner alliances with Deloitte and Goldman Sachs. HundredX operates no
+  public developer program: delivery is through a customer portal, negotiated data feeds and
+  partner channels, and no API documentation, OpenAPI description or pricing is published.
+image: null
 url: https://raw.githubusercontent.com/api-evangelist/hundredx/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-22'
 modified: '2026-08-22'
 tags:
 - Company
-apis: []
+- Customer Experience
+- Consumer Insights
+- Market Research
+- Data and Analytics
+- Alternative Data
+- Investment Research
+- Sentiment Analysis
+- Data Licensing
+- No Public API
+tags_raw:
+- customer-experience
+- consumer-insights
+- market-research
+- alternative-data
+- investment-research
+- data-licensing
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: hundredx:hundredx-mcp
+  name: HundredX MCP Servers
+  description: >-
+    Two HundredX-operated Model Context Protocol servers reachable on the public internet —
+    "HX BigQuery MCP Server" 2.0.0 at hx-bigquery-mcp.hundredx.com and "Jupyter MCP Server"
+    2.0.0 at jupyter-mcp.hundredx.com. Both publish standards-compliant OAuth 2.1 discovery
+    (RFC 9728 protected-resource metadata, RFC 8414 authorization-server metadata, RFC 7591
+    dynamic client registration, PKCE S256) and both return 401 invalid_token to an anonymous
+    tools/list. These are HundredX's own internal analyst tooling over its BigQuery warehouse
+    and notebooks — Google-federated scopes bigquery.readonly and cloud-platform — not a
+    customer-facing agent product. HundredX publishes no documentation for them.
+  humanURL: https://hundredx.com/
+  baseURL: https://hx-bigquery-mcp.hundredx.com
+  tags:
+  - MCP
+  - Agent
+  - Internal
+  properties:
+  - type: MCPServer
+    url: mcp/hundredx-mcp.yml
+  - type: Authentication
+    url: authentication/hundredx-authentication.yml
+  - type: OAuthScopes
+    url: scopes/hundredx-scopes.yml
 common:
+- type: Security
+  url: security/hundredx-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/hundredx-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/hundredx-domain-security.yml
 - type: Website
+  url: https://hundredx.com/
+- type: About
+  url: https://hundredx.com/aboutus
+- type: Support
+  url: https://help.hundredx.com/
+- type: Login
+  url: https://portal.hundredx.com/
+- type: Blog
+  url: https://hundredx.com/news-and-insights
+- type: TermsOfService
+  url: https://hundredx.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://hundredx.com/privacy
+- type: WellKnown
+  url: well-known/hundredx-well-known.yml
+- type: SecurityTxt
+  url: well-known/hundredx-security.txt
+- type: Authentication
+  url: authentication/hundredx-authentication.yml
+- type: OAuthScopes
+  url: scopes/hundredx-scopes.yml
+- type: Conformance
+  url: conformance/hundredx-conformance.yml
+- type: ErrorCatalog
+  url: errors/hundredx-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/hundredx-lifecycle.yml
+- type: Conventions
+  url: conventions/hundredx-conventions.yml
+- type: Plans
+  url: plans/hundredx-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/hundredx-rate-limits.yml
+- type: LLMsTxt
+  url: llms/hundredx-llms.txt
+x-listing:
+  venue: Forge Global secondary market
   url: https://forgeglobal.com/hundredx_stock/
+  note: >-
+    The company was harvested from this secondary-market listing. It is a VENUE page about
+    HundredX, not a HundredX property, so it is recorded here rather than as the Website
+    pointer.
+x-enrichment:
+  date: '2026-08-22'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

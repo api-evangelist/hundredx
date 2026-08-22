@@ -1,0 +1,44 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Anonymous responses observed from https://feedbackhistory.api.hundredxinc.com,
+  https://api.hundredxinc.com and the two HundredX MCP endpoints on 2026-08-22.
+format: not-rfc9457
+format_note: >-
+  DERIVED FROM OBSERVED RESPONSES, NOT FROM A SPEC. HundredX publishes no OpenAPI and no
+  error reference, so there is no catalogue of documented error codes to enrich this with.
+  What follows is only what the live surfaces actually returned to an unauthenticated caller.
+envelopes:
+  - id: hal-error
+    surface: https://feedbackhistory.api.hundredxinc.com
+    media_type: application/json
+    shape: Spring HATEOAS / HAL
+    fields: [message, logref, path, _embedded, _links]
+    example: '{"message":"Page Not Found","logref":null,"path":null,"_embedded":{},"_links":{"self":{"href":"/","templated":false,"profile":null,"deprecation":null,"title":null,"hreflang":null,"type":null,"name":null}}}'
+    observed_status_codes: [404]
+    note: >-
+      Every anonymously reachable path returns this envelope with status 404, including paths
+      that would normally exist on a Spring Data REST service (/profile, /actuator, /v3/api-docs).
+      The service is present and answering; its routes are not exposed to anonymous callers.
+  - id: oauth-bearer-error
+    surface: https://hx-bigquery-mcp.hundredx.com/mcp, https://jupyter-mcp.hundredx.com/mcp
+    media_type: application/json
+    shape: RFC 6750 OAuth 2.0 bearer-token error
+    fields: [error, error_description]
+    example: '{"error":"invalid_token","error_description":"Missing or invalid access token"}'
+    observed_status_codes: [401]
+  - id: empty-404
+    surface: https://api.hundredxinc.com
+    media_type: null
+    shape: bare 404, zero-length body, no content-type
+    observed_status_codes: [404]
+  - id: edge-challenge
+    surface: https://hundredx.com (all HTML paths)
+    media_type: text/html
+    shape: Cloudflare managed challenge interstitial (cf-mitigated. challenge)
+    observed_status_codes: [403]
+    note: An edge bot policy, not an application error. Recorded so it is not mistaken for one.
+problem_types: []
+problem_types_note: >-
+  Empty because HundredX documents no error codes anywhere public. An honest zero, not a gap
+  in the probe.

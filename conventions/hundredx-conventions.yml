@@ -1,0 +1,69 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Live probes of every HundredX-controlled host, 2026-08-22. No OpenAPI exists to derive from
+  and no developer documentation exists to search; everything below is either an observed
+  runtime fact or an explicit "not published".
+auth_style:
+  portal: OpenID Connect via Auth0 custom domain (login.hundredxinc.com) — see authentication/hundredx-authentication.yml
+  mcp: OAuth 2.1 bearer, Google-federated, Authorization header only (bearer_methods_supported ["header"])
+  api_keys: not published
+idempotency:
+  supported: unknown
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    No public write surface and no documentation, so idempotency cannot be established.
+    Recorded as unknown rather than false — HundredX may implement it behind the portal.
+pagination:
+  style: unknown
+  params: []
+  response_fields: []
+  note: >-
+    Not documented. The HAL envelope on feedbackhistory.api.hundredxinc.com implies Spring
+    HATEOAS paging conventions (_embedded / _links with first/prev/next/last) would apply to
+    collection resources, but no collection resource is anonymously reachable, so this is not
+    asserted.
+field_expansion:
+  supported: unknown
+sparse_fieldsets:
+  supported: unknown
+metadata:
+  supported: unknown
+request_id_tracing:
+  supported: unknown
+  header: null
+  note: >-
+    No X-Request-Id, X-Correlation-Id or traceparent observed on any anonymous response. The
+    Cloudflare edge returns cf-ray on hundredx.com, which is an edge trace, not an application one.
+versioning:
+  style: unknown
+  note: >-
+    api.hundredxinc.com and feedbackhistory.api.hundredxinc.com use a subdomain-per-service
+    layout with dev/staging siblings (api.dev.hundredxinc.com, api.staging.hundredxinc.com,
+    feedbackhistory.api.staging.hundredxinc.com). No /v1 path segment answers.
+error_envelope:
+  shape: HAL (application/json) on the API tier, RFC 6750 OAuth error object on the MCP tier
+  rfc9457: false
+  detail: errors/hundredx-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header observed on any anonymous response.
+    See rate-limits/hundredx-rate-limits.yml.
+dry_run_mode:
+  supported: na
+  note: No public write surface.
+reversibility:
+  state: na
+  grade: na
+  write_surfaces: []
+  note: >-
+    N/A, not zero. HundredX exposes no public write operation to an unauthenticated or
+    self-serve caller: the only reachable surfaces are two OAuth-gated read-oriented MCP
+    servers (bigquery.readonly / cloud-platform), a customer portal behind an Auth0 login,
+    and a HAL API whose every anonymous route 404s. There is no create, update or delete
+    an agent could take that would need taking back, so there is no reversal operation to
+    document and no window to state. If HundredX later publishes a write API, this block
+    becomes gradeable; asserting a reversal window now would be inventing one.

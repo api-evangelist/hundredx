@@ -1,0 +1,26 @@
+generated: '2026-08-22'
+method: searched
+source: >-
+  HundredX public site (hundredx.com — /investor-solutions, /for-ai-applications, /aboutus)
+  read via search-engine indexing on 2026-08-22; the pages themselves return HTTP 403 to any
+  non-browser client behind Cloudflare's managed challenge.
+plan_count: 0
+plans: []
+note: >-
+  HundredX publishes NO plans, tiers or prices. It sells licensed consumer-experience data and
+  insights to enterprises and institutional investors through a sales motion — the site's
+  conversion paths are "contact us" / "request a demo" and a partner channel (Deloitte alliance,
+  Goldman Sachs collaboration), not a pricing page. There is no self-serve signup, no free tier,
+  no quota, no overage schedule and no metered API to price. plan_count: 0 is a measurement, not
+  a missing probe.
+pricing_page: null
+pricing_page_note: No /pricing or /plans path exists on hundredx.com.
+sales_gate: true
+evidence:
+  - url: https://hundredx.com/investor-solutions
+    status: 403
+  - url: https://hundredx.com/for-ai-applications
+    status: 403
+  - url: https://portal.hundredx.com/
+    status: 400
+    note: Redirects to the Auth0 login at login.hundredxinc.com/u/login — a customer login, not a signup.

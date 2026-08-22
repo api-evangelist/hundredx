@@ -1,0 +1,63 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  DNS + HTTP probes of status.hundredx.com and hundredx.statuspage.io, and a search of the
+  HundredX public site for a versioning, deprecation or SLA policy, 2026-08-22.
+versioning:
+  scheme: unknown
+  policy_url: null
+  note: >-
+    No versioning policy is published. The only version signal on any HundredX surface is the
+    MCP server self-report ("version":"2.0.0" on both hx-bigquery-mcp and jupyter-mcp), which
+    is a build version, not an API version contract.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  deprecation_header: unknown
+  rfc8594: false
+  note: >-
+    No deprecation policy published, and no RFC 8594 Sunset/Deprecation header observed on any
+    anonymous response. Worth recording that the HAL envelope on
+    feedbackhistory.api.hundredxinc.com carries a `deprecation` link attribute (Spring HATEOAS
+    supports it) — the field exists in the representation and is null. Capability, not policy.
+  deprecated_operations: []
+status_page:
+  published: false
+  url: null
+  evidence:
+    - url: https://status.hundredx.com/
+      status: 525
+      note: >-
+        A status.hundredx.com host IS configured — it resolves to Cloudflare — but the origin
+        TLS handshake fails (HTTP 525). Nothing is served.
+    - url: https://hundredx.statuspage.io/
+      status: 200
+      note: >-
+        Redirects to https://www.atlassian.com/software/statuspage — the Statuspage marketing
+        page, i.e. no tenant of that name exists. This is a soft-404, not a status page.
+    - url: 'DNS TXT hundredx.com'
+      status: null
+      note: >-
+        SPF includes stspg-customer.com (Statuspage's sending domain), so a Statuspage account
+        was provisioned at some point. Whatever it was, it is not reachable today.
+  conclusion: >-
+    A status page was set up and is now broken. No StatusPage pointer is emitted: a 525 is not
+    a served status page, and crediting one would assert a surface HundredX does not currently
+    serve.
+sla:
+  published: false
+  url: null
+changelog:
+  published: false
+  url: null
+  note: >-
+    https://hundredx.com/news-and-insights is a press/insights feed, not a dated product or API
+    changelog. No changelog artifact is emitted.
+support:
+  help_center: https://help.hundredx.com/
+  help_center_status: 200
+  platform: Freshdesk (robots.txt disallows /support/tickets/, /helpdesk/, /public/tickets/)
+  machine_readable: false
+  machine_readable_note: >-
+    The help center renders client-side — every path returns the same 170KB shell containing
+    "Please enable Javascript to access the portal" and zero article links in the HTML.
