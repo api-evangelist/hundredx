@@ -12,6 +12,17 @@ description: >-
   sales-led motion and partner alliances with Deloitte and Goldman Sachs. HundredX operates no
   public developer program: delivery is through a customer portal, negotiated data feeds and
   partner channels, and no API documentation, OpenAPI description or pricing is published.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: null
 url: https://raw.githubusercontent.com/api-evangelist/hundredx/refs/heads/main/apis.yml
 x-type: company
