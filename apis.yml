@@ -31,16 +31,12 @@ specificationVersion: '0.20'
 created: '2026-08-22'
 modified: '2026-08-22'
 tags:
-- Company
-- Customer Experience
-- Consumer Insights
-- Market Research
-- Data and Analytics
-- Alternative Data
-- Investment Research
-- Sentiment Analysis
-- Data Licensing
-- No Public API
+- customer-experience
+- consumer-insights
+- market-research
+- alternative-data
+- investment-research
+- data-licensing
 tags_raw:
 - customer-experience
 - consumer-insights
@@ -68,6 +64,10 @@ apis:
   humanURL: https://hundredx.com/
   baseURL: https://hx-bigquery-mcp.hundredx.com
   tags:
+  - MCP
+  - Agents
+  - Internal
+  tags_raw:
   - MCP
   - Agent
   - Internal
