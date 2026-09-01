@@ -31,12 +31,12 @@ specificationVersion: '0.20'
 created: '2026-08-22'
 modified: '2026-08-22'
 tags:
-- customer-experience
-- consumer-insights
-- market-research
-- alternative-data
-- investment-research
-- data-licensing
+- Customer Experience
+- Consumer Insights
+- Market Research
+- Alternative Data
+- Investment Research
+- Data Licensing
 tags_raw:
 - customer-experience
 - consumer-insights
