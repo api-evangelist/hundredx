@@ -97,3 +97,22 @@ tool_crosswalk: null
 tool_crosswalk_reason: No ToolCrosswalk is emitted. A crosswalk binds MCP tools to backing OpenAPI operationIds,
   and HundredX publishes neither an OpenAPI nor a GraphQL surface, and the live MCP tool lists are OAuth-gated.
   There is nothing on either side of the mapping to bind.
+rfc9728:
+  endpoint: https://hx-bigquery-mcp.hundredx.com/mcp
+  metadata_url: https://hx-bigquery-mcp.hundredx.com/.well-known/oauth-protected-resource
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://hx-bigquery-mcp.hundredx.com
+    authorization_servers:
+    - https://hx-bigquery-mcp.hundredx.com
+    scopes_supported:
+    - openid
+    - email
+    - profile
+    - bigquery.readonly
+    - cloud-platform.read-only
+    bearer_methods_supported:
+    - header
