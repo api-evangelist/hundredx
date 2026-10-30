@@ -64,26 +64,115 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-HundredX is a Dallas/Addison, Texas data and insights company (founded 2012) that measures customer
-experience at scale and links it to future business performance. It collects double-blind, ethically
-sourced consumer feedback through its HundredX Causes programs — funding nonprofits for every
-qualifying response — and licenses the resulting corpus and its GO Score (Growth Outlook) to
-enterprises, institutional investors and AI platforms.
+HundredX is a Dallas/Addison, Texas data and insights company founded in 2012 that measures customer experience at scale and links it to future business performance. Its "data for good" model collects double-blind, ethically sourced feedback through HundredX Causes programs — contributing funding to nonprofits for every qualifying response — and has accumulated tens of millions of pieces of first-party consumer feedback across 80+ industries covering roughly two-thirds of the US economy. The company packages that corpus as the HundredX GO Score (Growth Outlook), a leading indicator of revenue growth and market performance 6-12 months ahead, and licenses it to enterprises, institutional investors and AI platforms through a sales-led motion and partner alliances with Deloitte and Goldman Sachs. HundredX operates no public developer program: delivery is through a customer portal, negotiated data feeds and partner channels, and no API documentation, OpenAPI description or pricing is published.
 
-**HundredX operates no public developer program.** There is no API documentation, OpenAPI
-description, SDK, pricing page or self-serve signup. What this profile records is what HundredX
-actually serves on the public internet, probed on 2026-08-22:
+**Areas:** Customer Experience · Consumer Insights · Market Research · Alternative Data · Investment Research · Data Licensing
 
-- `hundredx.com` and `api.hundredxinc.com` each serve an RFC 9116 `security.txt`.
-- `login.hundredxinc.com` (Auth0 custom domain) serves a full OIDC discovery document for the
-  customer portal at `portal.hundredx.com`.
-- Two OAuth 2.1 MCP servers — `hx-bigquery-mcp.hundredx.com` and `jupyter-mcp.hundredx.com` —
-  publish RFC 9728 / RFC 8414 metadata. These are HundredX's own internal analyst tooling over its
-  BigQuery warehouse and notebooks, not a customer-facing agent product.
-- Every `hundredx.com` HTML page returns HTTP 403 to non-browser clients behind a Cloudflare
-  managed challenge.
+## HundredX on APIs.io
 
-Links:
-- https://hundredx.com/
-- https://help.hundredx.com/
-- Secondary-market listing (a venue page, not a HundredX property): https://forgeglobal.com/hundredx_stock/
+Everything profiled for HundredX is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hundredx/](https://apis.io/providers/hundredx/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [HundredX MCP Servers](https://apis.io/apis/hundredx/hundredx-mcp/) — Two HundredX-operated Model Context Protocol servers reachable on the public internet — "HX BigQuery MCP Server" 2.0.0 at hx-bigquery-mcp.hundredx.com and…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [HundredX MCP Servers](https://apis.io/servers/hundredx/hundredx-mcp-servers/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Hundredx Authentication](https://apis.io/security/hundredx/hundredx-authentication/)
+- [Hundredx Domain Security](https://apis.io/security/hundredx/hundredx-domain-security/)
+- [Hundredx Vulnerability Disclosure](https://apis.io/security/hundredx/hundredx-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Hundredx Scopes](https://apis.io/scopes/hundredx/hundredx-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Hundredx Plans Pricing](https://apis.io/plans/hundredx/hundredx-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Hundredx Rate Limits](https://apis.io/rate-limits/hundredx/hundredx-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://hundredx.com/)
+- [Support](https://help.hundredx.com/)
+- [Blog](https://hundredx.com/news-and-insights)
+- [Terms of service](https://hundredx.com/terms-of-use)
+- [Privacy policy](https://hundredx.com/privacy)
+
+## API Evangelist rating
+
+**Kin Score 23.8** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 27.6 |
+
+**Agent readiness 32.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hundredx/](https://apis.io/providers/hundredx/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for HundredX: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hundredx/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
